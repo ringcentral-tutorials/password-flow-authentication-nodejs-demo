@@ -1,0 +1,21 @@
+{
+  "name": "password-flow-authentication-nodejs-demo",
+  "version": "1.0.0",
+  "description": "Authenticate RingCentral platform using password flow.",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ringcentral"
+  ],
+  "author": "Paco-Vu",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "ringcentral": "^3.2.0",
+  },
+  "engines": {
+    "node": "8.1.2"
+  }
+}

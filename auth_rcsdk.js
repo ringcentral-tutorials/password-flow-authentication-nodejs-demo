@@ -1,10 +1,10 @@
 var RC = require('ringcentral')
 require('dotenv').load();
 if (process.env.ENVIRONMENT == "sandbox") {
-  require('dotenv').config({path: "../environment/.env-sandbox"});
+  require('dotenv').config({path: "./environment/.env-sandbox"});
   var tokens_file = "sdk_tokens_sb.txt"
 } else {
-  require('dotenv').config({path: "../environment/.env-production"});
+  require('dotenv').config({path: "./environment/.env-production"});
   var tokens_file = "sdk_tokens_pd.txt"
 }
 
