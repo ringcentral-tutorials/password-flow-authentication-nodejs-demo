@@ -1,0 +1,96 @@
+.chapter(data-title='RingCentral Platform Authentication - Password Flow OAuth')
+  .step(data-title='Clone and Setup the project', data-file='../README.md' data-highlight='10-18')
+    :markdown
+      ### Clone and Setup the project
+      Clone the project from GitHub and install RingCentral Node JS SDK and dependencies.
+
+  .step(data-title='Create a RingCentral app', data-file='../README.md' data-highlight='24-27')
+    h3 Create a RingCentral app
+
+    p If you don't know how to create a RingCentral app. Click <a href="https://developer.ringcentral.com/library/getting-started.html">here</a> for instructions.
+
+  .step(data-title='Set Environment Variables', data-file='../environment/dotenv-sandbox')
+    :markdown
+     ### Set Environment Variables
+     Copy the Client id and Client secret and add them to the `.env-sandbox` file.
+     ```
+     RC_CLIENT_ID=
+     RC_CLIENT_SECRET=
+     ```
+     Add the account login credentials to the `.env-sandbox` file.
+     ```
+     RC_USERNAME=
+     RC_PASSWORD=
+     RC_EXTENSION=
+     ```
+
+     If you want to specify variables for your production environment, repeat this step for the `.env-production` file.
+
+  .step(data-title='Programing options', data-file='../rc_authenticate.js' data-highlight='1-2')
+    :markdown
+      ### Authenticate using RingCentral Node JS SDK
+      Using a RingCentral SDK is the most convenient way to authenticate and access RingCentral platform services.
+
+      Let's start by creating a file named `rc_authenticate.js`.
+
+  .step(data-title='Load the environment variables', data-file='../rc_authenticate.js' data-highlight='4-12')
+    :markdown
+      ### Load the environment variables
+      We read the ENVIRONMENT value from the `.env` file and load the `.env-sandbox` or `.env-production` accordingly.
+
+      ### Specify a .txt file to keep the authentication data
+      For the sandbox environment, we save the data to the `tokens_sb.txt`.
+
+      For the production environment, we save the data to the `tokens_pd.txt`.
+
+      In your real application, you may want to secure the authentication data in a database or in a safe place as it contains the access token and the refresh token!
+
+  .step(data-title='Create a reusable class', data-file='../rc_authenticate.js' data-highlight='14-15')
+    :markdown
+      ### Create a reusable class
+      To make this tutorial code reusable and extensible, we define the RC_Authentication class and implement a couple utility functions.
+      ```
+      get_sdk()
+      get_platform()
+      ```
+  .step(data-title='Create an SDK instance', data-file='../rc_authenticate.js' data-highlight='18-25')
+    :markdown
+      ### Create an SDK instance
+      First we implement the `get_sdk()` function to instantiate the SDK and return the `sdk` instance.
+
+      To instantiate the `sdk`, we pass the client id, client secret and the platform environment parameters.
+
+  .step(data-title='Get the platform instance from the SDK', data-file='../rc_authenticate.js' data-highlight='27-28')
+    :markdown
+      ### Get the `platform` instance from the SDK
+      Now we implement the `get_platform` function.
+
+      First we call the `get_sdk()` function to get the `sdk` instance.
+
+      Then we call the `sdk.platform()` to retrieve the `platform` instance.
+
+  .step(data-title='Authenticate with the login() function', data-file='../rc_authenticate.js' data-highlight='39-49')
+    :markdown
+      ### Call the `login()` function
+      Now we authenticate a user by calling the `platform.login()` function, passing the username, extension_number and password.
+
+      Upon success, we will write the authentication data to a local file and return the `platform` instance to a caller function.
+
+  .step(data-title='Authenticate with the authentication data', data-file='../rc_authenticate.js' data-highlight='29-37')
+    :markdown
+      ### Read the saved authentication data
+      Every time we call the `get_platform()` function, we get the `platform` instance from the `sdk`, read the authentication data we saved locally and call the `platform.auth().setData(tokenObj)` function, passing along the authentication data.
+
+      Then we call the `platform.loggedIn()` function to check if we are still logged in or not. The SDK will automatically validate the access token's and the refresh token's expiration time and return true if the user is still authenticated. Otherwise, the function returns false and we proceed to the login procedure as discussed in the previous step.
+
+  .step(data-title='Use the RC_Authentication class', data-file='../demo.js' data-highlight='1-22')
+    :markdown
+      ### Use the RC_Authentication class
+      Now let's create a file `demo.js` and use the `RC_Authentication` class as shown in the demo code on the right-hand side.
+
+      In this demo, we call the account extension endpoint to read extensions' information and print them out on the console.
+
+      ### Run the demo app.
+      ```
+      $ node demo.js
+      ```
