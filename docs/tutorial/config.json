@@ -1,5 +1,5 @@
 {
-    "title": "RingCentral Platform Authentication - Password Flow OAuth",
+    "title": "RingCentral Password Flow Authentication OAuth - Node JS",
     "repo": "https://github.com/ringcentral-tutorials/password-flow-authentication-nodejs-demo",
     "description": "In this step-by-step tutorial, you are going to learn how to authenticate RingCentral platform using password flow in Node JS programming language. Click the \"Start\" button below to start the tutorial.",
     "heroku": false
